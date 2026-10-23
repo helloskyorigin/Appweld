@@ -54,19 +54,20 @@ document.querySelectorAll('[data-url-form]').forEach(form => {
   field.addEventListener('input', () => { error.textContent = ''; field.removeAttribute('aria-invalid'); });
 });
 
+// Reveal content is never hidden; entry animation is a progressive enhancement.
 const revealElements = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !prefersReducedMotion.matches) {
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+      if (!entry.isIntersecting) return;
+      if (entry.target.animate) {
+        entry.target.animate([{ opacity: 0.84, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 520, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'none' });
       }
+      revealObserver.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -40px 0px', threshold: .08 });
+  }, { rootMargin: '0px 0px -20px 0px', threshold: 0.04 });
   revealElements.forEach(el => revealObserver.observe(el));
-} else {
-  revealElements.forEach(el => el.classList.add('visible'));
 }
 
 const scrollStory = document.getElementById('transform-scroll');
@@ -80,10 +81,10 @@ let scrollTicking = false;
 function animateScrollStory() {
   if (!scrollStory || !movingBrowser || !movingPhone || !movingArrow || !progressLine) return;
   scrollTicking = false;
-  if (prefersReducedMotion.matches) {
-    movingBrowser.style.transform = 'translateX(-36%) scale(.73)';
+  if (prefersReducedMotion.matches || window.innerWidth <= 900) {
+    movingBrowser.style.transform = 'none';
     movingBrowser.style.opacity = '1';
-    movingPhone.style.transform = 'translateX(100%) scale(1)';
+    movingPhone.style.transform = 'none';
     movingPhone.style.opacity = '1';
     movingArrow.style.opacity = '1';
     progressLine.style.width = '100%';

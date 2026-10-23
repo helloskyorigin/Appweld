@@ -12,7 +12,10 @@ Visit `http://localhost:3000`. No build step is necessary. Designed for static h
 
 ## Current state
 
-- Landing page and sample customization are interactive.
+- Landing page, mobile/tablet/desktop layouts, sample customization and `/create/` app designer are interactive.
+- The primary action consistently reads **Create My App**. The hero prioritizes how the product works; pricing is a small secondary section.
+- All public documentation/legal routes are actual pages with cross-navigation, not dead placeholders.
+- UX is separately tuned for 360–649px phones, 650–900px small tablets, 901–1100px large tablets, and desktop. Animated reveal content is never hidden until scrolled.
 - Entering a valid public URL navigates to `/create/`, a frontend-only preview.
 - **No payment integration, domain verification, Android build pipeline, APK generation, AAB generation, or build storage is implemented yet.** `/create/` clearly labels this. Do not present this branch as a functioning converter or turn on paid checkout until the full pipeline has been independently tested.
 - The $9 price is marked as an introductory planned offer; the $39 amount is labeled as a *planned standard price* rather than a fictitious former price.
@@ -28,7 +31,9 @@ Visit `http://localhost:3000`. No build step is necessary. Designed for static h
 ## Files
 
 - `index.html` — full marketing page.
-- `styles.css` — design system, responsive layouts, visual compositions and motion.
+- `styles.css` — original design system, visuals and motion.
+- `refinements.css` — responsive layouts, safer scroll story, hierarchy and accessibility fixes.
+- `create/studio.css` and `create/studio.js` — no-login local app-identity editor; real build remains pending.
 - `script.js` — navigation, URL validation, scroll chapter and customization interactions.
 - `create/index.html` — clearly labeled, non-paying branding-preview step.
 - `legal/*.html` — prelaunch legal, support and publishing-information pages.
