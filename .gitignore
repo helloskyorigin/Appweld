@@ -1,8 +1,8 @@
-node_modules/
-.next/
-dist/
-.env
-.env.*
-!.env.example
 .DS_Store
 .firebase/
+node_modules/
+dist/
+.env*
+!.env.example
+*.log
+__pycache__/
